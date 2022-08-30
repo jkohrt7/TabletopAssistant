@@ -1,0 +1,29 @@
+.table {
+    min-width: 16rem;
+    min-height: 30rem;
+    margin: 10%;
+    border: solid red 2px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.table__drop {
+    min-width: 10rem;
+    min-height: 15rem;
+    margin: auto;
+
+    border: solid green 2px;
+}
+
+.over {
+    border: goldenrod solid 4px
+}
+
+.hand__item {
+    min-width: 10rem;
+    min-height: 15rem;
+    background: rgb(0, 180, 36);
+}
