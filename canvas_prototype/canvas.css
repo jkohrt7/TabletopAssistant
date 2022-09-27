@@ -3,7 +3,7 @@
   display: flex;
 }
 
-#canvas {
+#main-board {
   border: solid black 3px;
   margin: auto;
 }
