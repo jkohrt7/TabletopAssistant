@@ -20,12 +20,11 @@ function mouseDown(e) {
       selectedArr.push(shape);
     }
   })
-
-  // Select the one with the greatest z-index
   if(selectedArr.length > 0) {
-    const shapeInFront = selectedArr.sort((shapeA,shapeB) => shapeA.z - shapeB.z).pop();
-    mainBoard.moveToFront(shapeInFront);
-    mainBoard.selected.push({...initialMousePos, shape: shapeInFront});
+    const frontMostItem = selectedArr[selectedArr.length-1];
+    //mainBoard.moveToFront(frontMostItem)                              // Make a design choice!
+    mainBoard.selected.push({...initialMousePos, shape: frontMostItem});
+    
   }
 }
 
@@ -62,7 +61,6 @@ function setEventListeners() {
 }
 
 function initializeCanvas() {
-  // currently, addshape mutates the Rectangle to give it a z-index, and this is kinda bad.
   mainBoard.addShape(new Rectangle(10, 10, 50, 70, "rgb(200,0,0)"));
   mainBoard.addShape(new Rectangle(40, 40, 50, 70, "rgb(0,220,100)"));
 
