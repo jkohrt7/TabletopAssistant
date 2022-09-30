@@ -1,17 +1,11 @@
-// Classes
-class Shape {
+export class Rectangle {
   constructor(x, y, width, height, color) {
     this.x = x;
     this.y = y;
+    this.z = 0;
     this.width = width;
     this.height = height;
     this.color = color;
-  }
-}
-
-export class Rectangle extends Shape {
-  constructor(x, y, width, height, color) {
-    super(x, y, width, height, color);
   }
 
   getArea() {

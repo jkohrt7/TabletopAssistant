@@ -11,8 +11,24 @@ export class Canvas {
   }
 
   // Methods
+  getGreatestZ() {
+    if(this.shapes.length > 0) {
+      return this.shapes[this.shapes.length - 1].z;
+    }
+    return 0;
+  }
+
   addShape(shape) {
+    if(this.shapes.length > 0) {
+      shape.z = this.getGreatestZ() + 1;
+    }
+
     this.shapes.push(shape);
+  }
+
+  moveToFront(shape) {
+    shape.z = this.getGreatestZ() + 1;
+    this.shapes = this.shapes.sort((shapeA,shapeB) => shapeA.z - shapeB.z)
   }
 
   clearCanvas() {
