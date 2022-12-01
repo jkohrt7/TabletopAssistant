@@ -21,6 +21,7 @@ function mouseDown(e) {
       selectedArr.push(shape);
     }
   })
+
   if(selectedArr.length > 0) {
     const frontMostItem = selectedArr[selectedArr.length-1];
     //mainBoard.moveToFront(frontMostItem)                              // Make a design choice!
@@ -52,10 +53,13 @@ function mouseMove(e) {
 // MouseUp: deselect all items
 function mouseUp(e) {
   mainBoard.selected.forEach((selection) => {
-      //selection.shape.x = roundToMultipleOf(selection.shape.x, 50);
-      //selection.shape.y = roundToMultipleOf(selection.shape.y, 50);
+      selection.shape.x = roundToMultipleOf(selection.shape.x, 10);
+      selection.shape.y = roundToMultipleOf(selection.shape.y, 10);
     }
   )
+
+  mainBoard.draw();
+
   mainBoard.selected = [];
 }
 
@@ -67,7 +71,7 @@ function setEventListeners() {
 }
 
 function initializeCanvas() {
-  mainBoard.addShape(new Rectangle(10, 10, 50, 70, "rgb(200,0,0)"));
+  mainBoard.addShape(new Rectangle(10, 10, 50, 70, "rgb(200,0,0)")); // x, y, width, height, color
   mainBoard.addShape(new Rectangle(40, 40, 50, 70, "rgb(0,220,100)"));
 
   mainBoard.draw();
