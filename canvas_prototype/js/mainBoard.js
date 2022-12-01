@@ -2,6 +2,7 @@
 
 import { Canvas } from "./canvas.js";
 import { Rectangle } from "./shapes.js";
+import { roundToMultipleOf } from "./utils/mathHelpers.js";
 
 const mainBoard = new Canvas("main-board");
 
@@ -50,6 +51,11 @@ function mouseMove(e) {
 
 // MouseUp: deselect all items
 function mouseUp(e) {
+  mainBoard.selected.forEach((selection) => {
+      //selection.shape.x = roundToMultipleOf(selection.shape.x, 50);
+      //selection.shape.y = roundToMultipleOf(selection.shape.y, 50);
+    }
+  )
   mainBoard.selected = [];
 }
 
