@@ -1,16 +1,18 @@
 // Canvas class
 export class Canvas {
   constructor(id) {
-    this.width = document.getElementById(id).width;
-    this.height = document.getElementById(id).height;
+    // this.dimensions = document.getElementById(id).getBoundingClientRect();
     this.element = document.getElementById(id);
     this.context = document.getElementById(id).getContext("2d");
-    this.dimensions = document.getElementById(id).getBoundingClientRect();
     this.shapes = [];
     this.selected = [];
   }
 
   // Methods
+  getCanvasBounds() {
+    return this.element.getBoundingClientRect();
+  }
+
   addShape(shape) {
     this.shapes.push(shape);
   }
@@ -24,7 +26,7 @@ export class Canvas {
   }
 
   clearCanvas() {
-    this.context.clearRect(0, 0, this.width, this.height)
+    this.context.clearRect(0, 0, this.element.width, this.element.height)
   }
 
   draw() {
