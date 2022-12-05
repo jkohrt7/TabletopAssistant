@@ -10,33 +10,33 @@ const mainBoard = new Canvas("main-board");
 // MouseDown: determine if a shape was selected.
 function mouseDown(e) {
   e.preventDefault();
-  const canvasPosX = parseInt(e.clientX - mainBoard.dimensions.left);
-  const canvasPosY = parseInt(e.clientY - mainBoard.dimensions.top);
-  const initialMousePos = {initialX: e.clientX, initialY: e.clientY};
+  const canvasPosX = parseInt(e.clientX - mainBoard.getCanvasBounds().left);
+  const canvasPosY = parseInt(e.clientY - mainBoard.getCanvasBounds().top);
+  const initialMousePos = {initialX: canvasPosX, initialY: canvasPosY};
 
   // Note all clicked elements
   const selectedArr = [];
   mainBoard.shapes.forEach((shape) => {
     if(shape.isMouseColliding(canvasPosX, canvasPosY)) {
+      console.log("hit");
       selectedArr.push(shape);
     }
   })
 
   if(selectedArr.length > 0) {
     const frontMostItem = selectedArr[selectedArr.length-1];
-    //mainBoard.moveToFront(frontMostItem)                              // Make a design choice!
+    //mainBoard.moveToFront(frontMostItem)                              // should probably not do this by default
     mainBoard.selected.push({...initialMousePos, shape: frontMostItem});
-    
   }
 }
 
 // MouseMove: update the position of any selected objects
 function mouseMove(e) {
   mainBoard.selected.forEach((selection) => {
-    const mouseX = e.clientX;
-    const mouseY = e.clientY;
+    const mouseX = e.clientX - mainBoard.getCanvasBounds().left;
+    const mouseY = e.clientY - mainBoard.getCanvasBounds().top;
 
-    // TODO: For offset, need to store initial position onMouseDown, then subtract from x/y
+    // Add mouse offset when dragging
     let dx = mouseX - selection.initialX;
     let dy = mouseY - selection.initialY;
 
@@ -63,11 +63,17 @@ function mouseUp(e) {
   mainBoard.selected = [];
 }
 
+// handle screen resize
+function handleScreenResize() {
+  
+} 
+
 // Canvas Setup for mainBoard
 function setEventListeners() {
   mainBoard.element.addEventListener("mousedown", mouseDown);
   mainBoard.element.addEventListener("mousemove", mouseMove);
   mainBoard.element.addEventListener("mouseup", mouseUp);
+  mainBoard.element.addEventListener("resize", handleScreenResize);
 }
 
 function initializeCanvas() {
